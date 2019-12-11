@@ -1,0 +1,15 @@
+body{
+    background-image: url('../img/bloodborne.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+label{
+    color: white;
+    font-family: fantasy;
+}
+h1{
+    font-style: oblique 30deg;
+    text-align: center;
+    text-shadow: 2px 5px #643b41;
+}
+
