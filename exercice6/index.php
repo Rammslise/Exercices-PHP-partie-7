@@ -19,7 +19,7 @@
             if (empty($_GET['firstname']) && empty($_GET['lastname'])) {
                 ?>   
                 <!--Alors on affiche le formulaire complet -->
-            <form method="get" action="index.php">
+            <form method="GET" action="index.php">
                 <div class="form-row">
                     <div class="col-md-3 mb-0 p-2">
                         <label for="civility">Civilité :
@@ -48,7 +48,7 @@
         <?php
         //sinon si les cases sont remplies, on affiche la phrase 'Bienvenue....' 
     } elseif (isset($_GET['lastname']) && ($_GET['firstname'])) {
-        echo 'Beenvenue ' . $_GET['civility'] . ' ' . $_GET['lastname'] . ' ' . $_GET['firstname'];
+        echo 'Bienvenue ' . $_GET['civility'] . ' ' . $_GET['lastname'] . ' ' . $_GET['firstname'];
     }
     ?>
 </p>

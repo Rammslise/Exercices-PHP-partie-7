@@ -14,7 +14,7 @@ Ce formulaire doit rediriger vers la page index.php.
 Vous avez le choix de la méthode. -->
     <body>
         <h1> Merci de renseigner les champs suivants</h1>
-        <form method="post" action="index.php">
+        <form method="GET" action="index.php">
             <p>
                 <label for="civility">Civilité :
                     <select name="civility">
@@ -39,10 +39,12 @@ Vous avez le choix de la méthode. -->
         </form>
         <p>
             <?php
-            if (isset($_POST['validate'])) {
-                echo 'Bonjour ' . $_POST['civility'] . ' ' . $_POST['firstname'] . ' ' . $_POST['lastname'];
-            }
-            ?>
+            if (isset($_GET['civility']) && isset($_GET['lastname']) && isset($_GET['firstname'])) {
+                echo 'Bonjour et bienvenue ' . $_GET['civility'] . ' ' . $_GET['lastname'] . ' ' . $_GET['firstname'];
+            } else {
+                echo 'Une erreur est survenue, merci de remplir les champs demandés';
+                ?>
+            <?php } ?>           
         </p>
     </body>
 </html>

@@ -37,14 +37,14 @@
         </nav>
         <ul class="nav nav-tabs">
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#registration">Inscription</a>
+                <a class="nav-link active" data-toggle="tab" href="#registration">Inscription</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#connexion">Connexion</a>         
+                <a class="nav-link" data-toggle="tab" href="#connexion">Connexion</a>         
             </li>
         </ul>
         <div id="content" class="tab-content">
-            <div class="tab-pane fade" id="registration">                   
+            <div class="tab-pane fade show active" id="registration">                   
                 <?php
                 if (empty($_POST['firstname']) || empty($_POST['lastname']) || empty($_FILES['file']['name'])) {
                     ?>                            
@@ -57,7 +57,7 @@
                             </div>
                             <div class="card-body text-center">
                                 <!--il faut ajouter l'attribut 'enctype', pour que le navigateur du visiteur sait qu'il s'apprête à envoyer des fichiers. -->
-                                <form method="post" action="index.php" enctype="multipart/form-data"> 
+                                <form method="POST" action="index.php" enctype="multipart/form-data"> 
                                     <div class="form-row">
                                         <div class="col-md-3">
                                             <label for="civility">Civilité :
@@ -69,12 +69,12 @@
                                         </div>
                                     </div>
                                     <div class="card-body text-center">                                   
-                                        <label for="firstname">Votre prénom :</label>
-                                        <input type="text" class="form-control" name="firstname" placeholder="Prénom" required>                                 
+                                        <label for="lastname">Votre Nom :</label>
+                                        <input type="text" class="form-control" name="lastname" placeholder="Nom" required>                                 
                                     </div>
                                     <div class="card-body text-center">
-                                        <label for="lastname">Votre nom :</label>
-                                        <input type="text" class="form-control" name="lastname" placeholder="Nom" required>
+                                        <label for="firstname">Votre Prénom :</label>
+                                        <input type="text" class="form-control" name="firstname" placeholder="Prénom" required>
                                     </div>
                                     <div class="card-body text-center">                           
                                         <label for="send">Envoyer votre fichier :</label>
@@ -91,36 +91,38 @@
                             </div>
                         </div>
                     </div>
-                <?php } ?>
-                <!-- Modal -->
-                <div class="modal fade" id="buttonRegistration" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-show="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalCenterTitle">Bienvenue</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <p>          
-                                    <?php
-                                    if (isset($_POST['lastname']) && isset($_POST['firstname'])) {
-                                        echo 'Bienvenue ' . $_POST['civility'] . ' ' . $_POST['lastname'] . ' ' . $_POST['firstname'] . '. <br/> ' . 'Votre fichier : ' . $_FILES['file']['name'] . ' a pour extension : ' . pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION) . '.';
-                                    }
-                                    ?>
-                                </p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-info">Sauvegarder</button>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>                                                   -
-                            </div>
+                </div> 
+            <?php } ?>
+
+            <!-- Modal -->
+            <div class="modal fade" id="buttonRegistration" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-show="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalCenterTitle">Bienvenue</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>          
+                                <?php
+                                if (isset($_POST['lastname']) && isset($_POST['firstname'])) {
+                                    echo 'Bienvenue ' . $_POST['civility'] . ' ' . $_POST['lastname'] . ' ' . $_POST['firstname'] . '. <br/> ' . 'Votre fichier : ' . pathinfo($_FILES['file']['name'], PATHINFO_FILENAME) . ' a pour extension : ' . pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION) . '.';
+                                }
+                                ?>
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-info">Sauvegarder</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>                                                   -
                         </div>
                     </div>
                 </div>
-            </div>              
+            </div>
+
             <!-- Page de la connexion et actualités-->
-            <div class="tab-pane fade show active" id="connexion">
+            <div class="tab-pane fade" id="connexion">
                 <div class="row">
                     <form class="form-menu-md-3 mb-4 p-4">
                         <div class="form-group">

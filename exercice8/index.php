@@ -36,14 +36,14 @@
         </nav>
         <ul class="nav nav-tabs">
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#registration">Inscription</a>
+                <a class="nav-link active" data-toggle="tab" href="#registration">Inscription</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#connexion">Connexion</a>         
+                <a class="nav-link" data-toggle="tab" href="#connexion">Connexion</a>         
             </li>
         </ul>
         <div id="content" class="tab-content">
-            <div class="tab-pane fade" id="registration">                   
+            <div class="tab-pane fade show active" id="registration">                   
                 <?php
                 if (empty($_POST['firstname']) || empty($_POST['lastname']) || empty($_FILES['file']['name'])) {
                     ?>                            
@@ -56,7 +56,7 @@
                             </div>
                             <div class="card-body text-center">
                                 <!--il faut ajouter l'attribut 'enctype', pour que le navigateur du visiteur sait qu'il s'apprête à envoyer des fichiers. -->
-                                <form method="post" action="index.php" enctype="multipart/form-data"> 
+                                <form method="POST" action="index.php" enctype="multipart/form-data"> 
                                     <div class="form-row">
                                         <div class="col-md-3">
                                             <label for="civility">Civilité :
@@ -68,18 +68,18 @@
                                         </div>
                                     </div>
                                     <div class="card-body text-center">                                   
-                                        <label for="firstname">Votre prénom :</label>
-                                        <input type="text" class="form-control" name="firstname" placeholder="Prénom" required>                                 
+                                        <label for="lastname">Votre nom :</label>
+                                        <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Nom" required>                                 
                                     </div>
                                     <div class="card-body text-center">
-                                        <label for="lastname">Votre nom :</label>
-                                        <input type="text" class="form-control" name="lastname" placeholder="Nom" required>
+                                        <label for="firstname">Votre prénom :</label>
+                                        <input type="text" class="form-control" name="firstname" id="firstname" placeholder="Prénom" required>
                                     </div>
                                     <div class="card-body text-center">                           
                                         <label for="send">Envoyer votre fichier :</label>
                                         <input type="file" class="form-control" name="file">
                                         <small id="fileHelp" class="form-text text-muted">Insérer votre fichier.</small>
-                                        <button class="btn btn-info" type="submit" name="register">Inscription</button>
+                                        <input class="btn btn-info" type="submit" name="register" value="Inscription" />
                                     </div>
                                     <!-- Footer du fornulaire -->
                                     <div class="card-body text-center">
@@ -90,6 +90,7 @@
                             </div>
                         </div>
                     </div>
+
                 <?php } ?>
                 <!-- Modal -->
                 <div class="modal fade" id="buttonRegistration" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-show="true">
@@ -104,12 +105,12 @@
                             <div class="modal-body">
                                 <p>          
                                     <?php
-                                    if (isset($_POST['lastname']) && isset($_POST['firstname'])) {
+                                    if (isset($_POST['lastname']) && isset($_POST['firstname']) && isset($_POST['civility']) && isset($_FILES['file'])) {
                                         $infoFile = pathinfo($_FILES['file']['name']);
                                         $extensionUpload = $infoFile['extension'];
-                                        $extensionOk = array('pdf');
-                                        if (in_array($extensionUpload, $extensionOk)) {
-                                            echo 'Bonjour ' . $_POST['civility'] . ' ' . $_POST['lastname'] . ' ' . $_POST['firstname'] . '. <br/> ' . 'Votre fichier a été correctement téléchargé.';
+
+                                        if ($extensionUpload == 'pdf' || $extensionUpload == 'PDF') {
+                                            echo 'Bonjour ' . $_POST['civility'] . ' ' . $_POST['lastname'] . ' ' . $_POST['firstname'] . '. <br/> ' . 'Votre fichier ' . $_FILES['file']['name'] . ' a été correctement téléchargé.';
                                         } else {
                                             echo 'Merci de mettre votre fichier au format pdf.';
                                         }
@@ -123,10 +124,10 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>              
+                </div>       
+            </div> 
             <!-- Page de la connexion et actualités-->
-            <div class="tab-pane fade show active" id="connexion">
+            <div class="tab-pane fade" id="connexion">
                 <div class="row">
                     <form class="form-menu-md-3 mb-4 p-4">
                         <div class="form-group">
